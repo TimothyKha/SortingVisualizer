@@ -14,8 +14,13 @@ public class QuickSort implements Runnable {
 
     public void run() {
         sort();
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         frame.linearWipe(sortArray);
         Visualizer.sorting = false;
+        Visualizer.running = false;
     }
 
     private void sort() {
@@ -24,9 +29,25 @@ public class QuickSort implements Runnable {
 
     private void quickSort(Integer[] arr, int begin, int end) {
         if (begin < end) {
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
             int partitionI = partition(arr, begin, end);
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
             quickSort(arr, begin, partitionI - 1);
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
             quickSort(arr, partitionI + 1, end);
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
         }
     }
 
@@ -43,6 +64,10 @@ public class QuickSort implements Runnable {
     }
 
     private int partition(Integer[] arr, int begin, int end) {
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return 0;
+        }
         int pivot = arr[end];
         int i = (begin - 1);
         for (int j = begin; j < end; j++) {
@@ -59,6 +84,10 @@ public class QuickSort implements Runnable {
                     e.printStackTrace();
                 }
                 checkPause();
+                if (!Visualizer.running) {
+                    Visualizer.sorting = false;
+                    return 0;
+                }
             }
         }
         int temp = arr[i + 1];

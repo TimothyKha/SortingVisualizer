@@ -18,6 +18,7 @@ public class Visualizer {
     public static boolean fast = false;
     public static boolean stepped = false;
     public static boolean isPaused = false;
+    public static volatile boolean running = false;
 
     public static void main(String[] args) {
         frame = new VisualizationFrame();
@@ -46,9 +47,10 @@ public class Visualizer {
     public static void startSort(String sortName) {
         if (sortingThread == null || !sorting) {
             sorting = true;
+            running = true;
             switch (sortName) {
                 case "merge":
-                    sortingThread = new Thread(new MergeSort2(toSort, frame));
+                    sortingThread = new Thread(new MergeSort(toSort, frame));
                     break;
                 case "bubble":
                     sortingThread = new Thread(new BubbleSort(toSort, frame, fast));

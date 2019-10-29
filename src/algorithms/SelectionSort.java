@@ -23,8 +23,13 @@ public class SelectionSort implements Runnable {
 
     public void run() {
         sort();
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         frame.linearWipe(sortArray);
         Visualizer.sorting = false;
+        Visualizer.running = false;
     }
 
     public void sort() {
@@ -47,6 +52,10 @@ public class SelectionSort implements Runnable {
                 e.printStackTrace();
             }
             checkPause();
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
         }
     }
 

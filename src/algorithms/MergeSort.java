@@ -14,12 +14,21 @@ public class MergeSort implements Runnable {
 
     public void run() {
         sort(sortArray, 0, sortArray.length-1);
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         frame.linearWipe(sortArray);
         Visualizer.sorting = false;
+        Visualizer.running = false;
     }
 
 
     private void sort(Integer[] arr, int first, int last) {
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         int mid, left, right, tmp;
         if (first >= last)
             return;
@@ -50,8 +59,11 @@ public class MergeSort implements Runnable {
                 e.printStackTrace();
             }
             checkPause();
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
         }
-        // Whatever remains in [rt..last] is in place
     }
 
     private void checkPause() {

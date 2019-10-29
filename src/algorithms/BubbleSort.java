@@ -22,14 +22,20 @@ public class BubbleSort implements Runnable {
         arr[second] = temp;
     }
 
+
     public void run() {
         if (fast) {
             sortFast();
         } else {
             sort();
         }
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         frame.linearWipe(sortArray);
         Visualizer.sorting = false;
+        Visualizer.running = false;
     }
 
     public void sortFast() {
@@ -46,8 +52,11 @@ public class BubbleSort implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             checkPause();
+            if (!Visualizer.running) {
+                Visualizer.sorting = false;
+                return;
+            }
         }
         frame.reDraw(sortArray, 0, -1, -1);
     }
@@ -81,6 +90,10 @@ public class BubbleSort implements Runnable {
                     e.printStackTrace();
                 }
                 checkPause();
+                if (!Visualizer.running) {
+                    Visualizer.sorting = false;
+                    return;
+                }
             }
             if (!swapped) break;
         }

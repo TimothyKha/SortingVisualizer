@@ -32,6 +32,10 @@ public class InsertionSort implements Runnable {
                     e.printStackTrace();
                 }
                 checkPause();
+                if (!Visualizer.running) {
+                    Visualizer.sorting = false;
+                    return;
+                }
             }
         }
     }
@@ -54,6 +58,10 @@ public class InsertionSort implements Runnable {
             for (int j = iteration; j > insert; j--) {
                 sortArray[j] = sortArray[j - 1];
                 checkPause();
+                if (!Visualizer.running) {
+                    Visualizer.sorting = false;
+                    return;
+                }
             }
             sortArray[insert] = old;
             frame.reDraw(sortArray, iteration, -1, -1);
@@ -83,7 +91,12 @@ public class InsertionSort implements Runnable {
         } else {
             sort();
         }
+        if (!Visualizer.running) {
+            Visualizer.sorting = false;
+            return;
+        }
         frame.linearWipe(sortArray);
         Visualizer.sorting = false;
+        Visualizer.running = false;
     }
 }

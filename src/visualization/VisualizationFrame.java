@@ -25,6 +25,7 @@ public class VisualizationFrame extends JFrame {
     private JButton bubble;
     private JButton generate;
     private JButton pause;
+    private JButton stop;
 
     private GridBagConstraints c;
 
@@ -46,6 +47,7 @@ public class VisualizationFrame extends JFrame {
         //generate.setBounds(screenWidth-(int)(1.1*buttonWidth),60,buttonWidth, 70);
         pause = new JButton("Pause Sorting");//creating instance of JButton
         //generate.setBounds(screenWidth-(int)(1.1*buttonWidth),60,buttonWidth, 70);
+        stop = new JButton("Stop Sort");
 
         buttonPanel = new JPanel();
         arrayPanel = new JPanel();
@@ -59,6 +61,12 @@ public class VisualizationFrame extends JFrame {
         c.insets = new Insets(0, 0, 0, 2);
         c.anchor = GridBagConstraints.EAST;
 
+        stop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Visualizer.running = false;
+            }
+        });
         steppedVals.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,16 +137,16 @@ public class VisualizationFrame extends JFrame {
                 }
             }
         });
-
+        buttonPanel.add(bubble);
         buttonPanel.add(selection);
         buttonPanel.add(insertion);
         buttonPanel.add(merge);
         buttonPanel.add(quick);
-        buttonPanel.add(bubble);
         buttonPanel.add(generate);
         buttonPanel.add(pause);
         buttonPanel.add(fast);
         buttonPanel.add(steppedVals);
+        buttonPanel.add(stop);
 
         wrapper.add(buttonPanel, BorderLayout.SOUTH);
         wrapper.add(arrayPanel);
@@ -155,7 +163,7 @@ public class VisualizationFrame extends JFrame {
     public void initialDraw(Integer[] squares) {
         rectangles = new JPanel[Visualizer.numRectangles];
         arrayPanel.removeAll();
-        sizeModifier = (int) ((getHeight()*0.8) / (Visualizer.numRectangles));
+        sizeModifier = (int) ((getHeight()*0.9) / (Visualizer.numRectangles));
         for (int i = 0; i < Visualizer.numRectangles; i++) {
             rectangles[i] = new JPanel();
             rectangles[i].setPreferredSize(new Dimension(Visualizer.blockWidth, squares[i] * sizeModifier));
