@@ -7,7 +7,9 @@ All source code is stored in src directory. Algorithms can be found in the algor
 ## Example
 
 Merge Sort (in progress):
+
 ![Screenshot](/images/merge_sort_unsorted.jpg)
+*Yellow and red lines indicate the bounds of the current subarray, blue line indicates the progress of merging*
 
 Finished result after Merge Sort is complete:
 ![Screenshot](/images/merge_sort_sorted.jpg)
