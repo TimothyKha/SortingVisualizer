@@ -12,4 +12,5 @@ Merge Sort (in progress):
 *Yellow and red lines indicate the bounds of the current subarray, blue line indicates the progress of merging*
 
 Finished result after Merge Sort is complete:
+
 ![Screenshot](/images/merge_sort_sorted.jpg)
